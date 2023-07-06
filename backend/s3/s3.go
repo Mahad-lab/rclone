@@ -179,11 +179,13 @@ func init() {
 				Help:  "Get AWS credentials from the environment (env vars or IAM).",
 			}},
 		}, {
-			Name: "access_key_id",
-			Help: "AWS Access Key ID.\n\nLeave blank for anonymous access or runtime credentials.",
+			Name:      "access_key_id",
+			Help:      "AWS Access Key ID.\n\nLeave blank for anonymous access or runtime credentials.",
+			Sensitive: true,
 		}, {
-			Name: "secret_access_key",
-			Help: "AWS Secret Access Key (password).\n\nLeave blank for anonymous access or runtime credentials.",
+			Name:      "secret_access_key",
+			Help:      "AWS Secret Access Key (password).\n\nLeave blank for anonymous access or runtime credentials.",
+			Sensitive: true,
 		}, {
 			// References:
 			// 1. https://docs.aws.amazon.com/general/latest/gr/rande.html
@@ -1775,6 +1777,7 @@ header is added and the default (private) will be used.
 				Value: "arn:aws:kms:us-east-1:*",
 				Help:  "arn:aws:kms:*",
 			}},
+			Sensitive: true,
 		}, {
 			Name: "sse_customer_key",
 			Help: `To use SSE-C you may provide the secret encryption key used to encrypt/decrypt your data.
@@ -1786,6 +1789,7 @@ Alternatively you can provide --sse-customer-key-base64.`,
 				Value: "",
 				Help:  "None",
 			}},
+			Sensitive: true,
 		}, {
 			Name: "sse_customer_key_base64",
 			Help: `If using SSE-C you must provide the secret encryption key encoded in base64 format to encrypt/decrypt your data.
@@ -1797,6 +1801,7 @@ Alternatively you can provide --sse-customer-key.`,
 				Value: "",
 				Help:  "None",
 			}},
+			Sensitive: true,
 		}, {
 			Name: "sse_customer_key_md5",
 			Help: `If using SSE-C you may provide the secret encryption key MD5 checksum (optional).
@@ -1809,6 +1814,7 @@ If you leave it blank, this is calculated automatically from the sse_customer_ke
 				Value: "",
 				Help:  "None",
 			}},
+			Sensitive: true,
 		}, {
 			Name:     "storage_class",
 			Help:     "The storage class to use when storing new objects in S3.",
@@ -2050,9 +2056,10 @@ If empty it will default to the environment variable "AWS_PROFILE" or
 `,
 			Advanced: true,
 		}, {
-			Name:     "session_token",
-			Help:     "An AWS session token.",
-			Advanced: true,
+			Name:      "session_token",
+			Help:      "An AWS session token.",
+			Advanced:  true,
+			Sensitive: true,
 		}, {
 			Name: "upload_concurrency",
 			Help: `Concurrency for multipart uploads.
